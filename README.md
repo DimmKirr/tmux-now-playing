@@ -14,6 +14,9 @@ Showing currently playing track in tmux status bar with music controls
 - `mpd` ([Music Player Daemon](https://www.musicpd.org)) through `nc` (netcat)
 - [Cider](https://cider.sh) through `curl` and `jq`
 - [`nowplaying-cli`](https://github.com/kirtan-shah/nowplaying-cli)
+- (Linux) anything that supports MPRIS through `playerctl`
+  - Spotify 
+  - probably can work with other players 
 
 ## Configurations
 
