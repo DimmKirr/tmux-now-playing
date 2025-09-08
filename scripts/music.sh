@@ -35,6 +35,8 @@ replace() {
 main() {
   local remote_command=""
 
+  local player_icon="$(get_tmux_option "@now-playing-stopped-icon" " ")"
+
   if test "$1" = "--cmd"; then
     remote_command="$2"
   fi
@@ -81,7 +83,7 @@ main() {
 
   if test -z "$music_data"; then
     # no player is running
-    printf ""
+    printf "$player_icon"
     if test "$(get_tmux_option "@now-playing-auto-interval" "no")" = "yes"; then
       set_tmux_option "status-interval" "$(get_tmux_option "@now-playing-paused-interval" "5")"
     fi
@@ -89,7 +91,7 @@ main() {
   fi
 
   local player_state="$(printf "%s" "$music_data" | awk 'NR==1')"
-  local player_icon="$(get_tmux_option "@now-playing-paused-icon" " ")"
+  player_icon="$(get_tmux_option "@now-playing-paused-icon" " ")"
 
   if test "$player_state" = "playing"; then
     player_icon="$(get_tmux_option "@now-playing-playing-icon" ">")"
@@ -113,6 +115,17 @@ main() {
   local app_name="$(printf "%s" "$music_data" | awk 'NR==6')"
   clock 'extract data'
 
+
+  # Check if track duration is 0 (state in-between a "play/pause" and "no-player")
+  if test "$track_duration" -eq 0; then
+    # Set a stopped icon instead
+    player_icon="$(get_tmux_option "@now-playing-stopped-icon" " ")"
+
+    # Show a stopped icon and exit
+    printf "%s" "$player_icon"
+    exit
+  fi
+
   local interpolation_key=(
     "{icon}"
     "{title}"
@@ -125,6 +138,7 @@ main() {
     "{app}"
   )
   clock
+
   local interpolation_value=(
     "$player_icon"
     "$track_title"
