@@ -12,6 +12,7 @@ players=(
   "$(dirname "$CURRENT_DIR")/players/mpd.sh"
   "$(dirname "$CURRENT_DIR")/players/applescript.sh"
   "$(dirname "$CURRENT_DIR")/players/cscript.sh"
+  "$(dirname "$CURRENT_DIR")/players/playerctl.sh"
 )
 
 is_playing() {
