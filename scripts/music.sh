@@ -81,7 +81,8 @@ main() {
 
   if test -z "$music_data"; then
     # no player is running
-    printf ""
+    local player_icon="$(get_tmux_option "@now-playing-stopped-icon" "")"
+    printf "$player_icon"
     if test "$(get_tmux_option "@now-playing-auto-interval" "no")" = "yes"; then
       set_tmux_option "status-interval" "$(get_tmux_option "@now-playing-paused-interval" "5")"
     fi
