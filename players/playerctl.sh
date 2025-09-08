@@ -51,3 +51,12 @@ get_music_data() {
   printf "%s\n%s\n%s\n%s\n%s\nSpotify" "$status" "$position" "$duration" "$artist" "$title"
 }
 
+send_command() {
+  local remote_command="$1"
+
+  if test "$remote_command" = "pause"; then
+    playerctl play-pause
+  else
+    playerctl "$remote_command"
+  fi
+}
