@@ -11,12 +11,13 @@ Showing currently playing track in tmux status bar with music controls
   - iTunes / Music
 - (Windows through WSL only, experimental) `cscript` (Windows Script Host) - enable the following integrations and more in the future
   - iTunes
+- (Linux) [`playerctl`](https://github.com/altdesktop/playerctl) - services or apps that support the [MPRIS](https://specifications.freedesktop.org/mpris-spec/latest/) specification, such as
+  - Spotify
+  - YouTube Music (under Firefox or Chrome)
+  - VLC
 - `mpd` ([Music Player Daemon](https://www.musicpd.org)) through `nc` (netcat)
 - [Cider](https://cider.sh) through `curl` and `jq`
 - [`nowplaying-cli`](https://github.com/kirtan-shah/nowplaying-cli)
-- (Linux) anything that supports MPRIS through `playerctl`
-  - Spotify 
-  - probably can work with other players 
 
 ## Configurations
 
