@@ -6,6 +6,9 @@ source "$(dirname "$CURRENT_DIR")/scripts/cache.sh"
 source "$(dirname "$CURRENT_DIR")/scripts/helpers.sh"
 
 is_running() {
+  if ! test -n "$(command -v playerctl)"; then
+    return 1
+  fi
   if (playerctl status | grep -q "No players found") then
     return 1
   else # Player is found, but not playing (i.e. stopped or paused)
@@ -20,7 +23,7 @@ is_playing() {
 
   local player_status="$(playerctl status)"
 
-  if test "$player_status" = "Paused"; then
+  if test "$player_status" = "Stopped"; then
     return 1
   fi
 
@@ -32,8 +35,7 @@ get_music_data() {
   local title="$(playerctl metadata xesam:artist)"
   local artist="$(playerctl metadata xesam:title)"
 
-  # MPRIS provides the length in us, then we will need to do a bit of math here.
-   
+  # MPRIS provides the length in microsecond, then we will need to do a bit of math here.
   local duration="$(playerctl metadata mpris:length | awk '{printf("%d", int($1/1000000))}')"
   local position="$(playerctl position | cut -d. -f1)"
   local playerctl_status="$(playerctl status)"
