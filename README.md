@@ -11,8 +11,14 @@ Showing currently playing track in tmux status bar with music controls
   - iTunes / Music
 - (Windows through WSL only, experimental) `cscript` (Windows Script Host) - enable the following integrations and more in the future
   - iTunes
+- (Linux) [`playerctl`](https://github.com/altdesktop/playerctl) - services or apps that support the [MPRIS](https://specifications.freedesktop.org/mpris-spec/latest/) specification, such as
+  - Spotify
+  - YouTube Music (under Firefox or Chrome)
+  - VLC
 - `mpd` ([Music Player Daemon](https://www.musicpd.org)) through `nc` (netcat)
-- [`nowplaying-cli`](https://github.com/kirtan-shah/nowplaying-cli)
+- [Cider](https://cider.sh) through `curl` and `jq`
+- [`nowplaying-cli`](https://github.com/kirtan-shah/nowplaying-cli) (Note: [not compatible with macOS Tahoe](https://github.com/kirtan-shah/nowplaying-cli/issues/28))
+- [`media-control`](https://github.com/ungive/media-control) - macOS media control CLI tool (recommended for macOS Tahoe and above)
 
 ## Configurations
 
@@ -60,19 +66,19 @@ Values: string
 - `@now-playing-play-pause-key`  
 Description: A list of key to bind as a play/pause command  
 Default: `,`  
-Values: a space separated string
+Values: space separated string
 - `@now-playing-stop-key`  
 Description: A list of key to bind as a stop command  
 Default: `.`  
-Values: a space separated string
+Values: space separated string
 - `@now-playing-previous-key`  
 Description: A list of key to bind as a previous track command  
 Default: `;`  
-Values: a space separated string
+Values: space separated string
 - `@now-playing-next-key`  
 Description: A list of key to bind as a next track command  
 Default: `'`  
-Values: a space separated string
+Values: space separated string
 
 ### Update Interval
 
@@ -100,10 +106,27 @@ Values: string
 Description: A port number of MPD server  
 Default: `6600`  
 Values: number
+- `@now-playing-cider-host`  
+Description: An IP address to Cider web server  
+Default: `127.0.0.1`  
+Values: string
+- `@now-playing-cider-port`  
+Description: A port number of Cider web server  
+Default: `10767`  
+Values: number
+- `@now-playing-cider-token`  
+Description: An API token for Cider web server  
+Default: `` (empty string)
+Values: string (leave empty for no token)
 - `@now-playing-nowplaying-cli-include-music-app`  
 Description: A boolean string to indicate whether to have Apple's Music app
 processed through nowplaying-cli (which is quite flaky) or not  
 Default: `no`  
+Values: `0` / `no` / `false` / `1` / `yes` / `true`
+- `@now-playing-media-control-include-music-app`  
+Description: A boolean string to indicate whether to have Apple's Music app
+processed through media-control or not  
+Default: `yes`  
 Values: `0` / `no` / `false` / `1` / `yes` / `true`
 
 #### Components
